@@ -8,6 +8,8 @@ const diarioFechaController = require("../../controllers/diariofecha.controller"
 // RUTAS de /api/diariofecha
 router.get("/", diarioFechaController.consultaDia)
 
+router.get("/paginado", diarioFechaController.consultaDiaPaginado)
+
 router.get("/eleccion/:fecha", diarioFechaController.getDay)
 
 router.get("/empresas", diarioFechaController.allInteresantes)

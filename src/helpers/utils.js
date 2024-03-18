@@ -54,11 +54,13 @@ function extraeEmpresas(arrObjetos) {
 // esta función recorre un objeto para buscar coindicencias del valor de la clave T con el array de empresas que quieres controlar, si coincide devuelve el objeto, si no devuelve false
 // para añadir acciones de mas de cierto valor  || objeto["c"] > 250
 function recorreObjeto(objeto) {
-    const interesantes = ["WMT", "AMZN", "XOM", "AAPL", "UNH", "CVS", "PM", "GOOGL", "MCK", "CVX", "JPM", "MSFT", "ABC", "COST", "CAH", "CI", "MRO", "PSX", "VLO", "F", "HD", "GM", "ELV", "KR", "CNC", "VZ", "WBA", "FNMA", "CMCSA", "T", "META", "BAC", "TGT", "DELL", "ADM", "C", "UPS", "PFE", "LOW", "JNJ", "FDX", "HUM", "ET", "FMMC", "PEP", "WFC", "DIS", "COP", "TSLA", "P&G", "UPS", "GE", "MET", "GS", "SYY", "BG", "RTX", "BS", "SNEX", "LMT", "MSIM", "INTC", "HPQ", "SNX", "IBM", "HCA", "PRU", "CAT", "MRK", "EPD", "ABBV", "PAGP", "DOW", "AIG", "AXP", "OTC", "CHTR", "TSN", "DE", "CSCO", "DAL", "LMIE", "TJX", "PGR", "AAL", "CHS", "PFGC", "PBF", "NKE", "BBY", "BMY", "UAL", "TMO", "QCOM", "ABT", "KO", "ORCL", "NUE", "OXY", "MMM", "WBD", "SBUX", "UBER", "PM", "NFLX", "CRM", "PARA", "KMX"]
+    
+    const interesantes = ['NFLX','CACI','BIO','NKE','NRGU','CI','FDX','CAT','KO','JNJ','SPY','WMT','MCO','HCA','INTC','CACC','VOO','NOC','MKL','IBM','MDGL','TJX','GHC','REGN','CAH','LMT','ELV','GS','AZO','PH','COP','T','AULT','BRK.B','MPWR','BACpL','MET','WFC','GE','DOW','BMY','ORLY','ORCL','MSTR','DPZ','CHS','BRK.A','TSN','DECK','TMO','LULU','ABBV','ALGN','WFCpL','HUM','BAC','AMZN','USBpA','MRO','SPGI','VGT','HPQ','CRM','COKE','NUE','PARA','QQQ','UBER','BIIB','INTU','POOL','MA','QCOM','URI','KMX','MRK','LOW','UAL','PGR','AON','F','RTX','ODFL','PBF','MDY','ABC','CABO','PSX','CHE','MELI','TDG','IVV','EPD','AIG','VRTX','UPS','TPL','GOOGL','MKTX','SNEX','BKNG','PEP','AAL','SEB','AVGO','TGT','PFGC','WBA','ADM','GWW','SAM','PODD','LIN','VLO','TYL','PRU','COST','LRCX','VZ','MSFT','AAPL','HD','OXY','CHTR','AVTX','PEN','ADBE','MSCI','UNH','NOW','CSCO','KNSL','KR','GM','LLY','IDXX','MCK','ISRG','DIS','DIA','NEU','EQIX','SYY','IT','BLK','MMM','JPM','ARGX','CMCSA','DE','CVS',
+    'BBY','SNX','META','PAGP','RE','TSLA','BG','KLAC','MTD','CNC','WBD','DAL','ABT','FCNCA','FICO','CTAS','PM','PFE','C','ASML','WSO','ET','FDS','MULN','NRGD','AXP','XOM','DELL','HUBS','MLM','ANSS','WINA','CVX','ULTA','NVR','SNPS','SBUX','GMBL','ROP','WST','BH.A','CMG','TDY','BIO.B','XELAP','FBGX','WTM','ATRI','ZTEST', 'NVDA']
 
     for (let empresa of interesantes) {
         for (let clave in objeto) {
-            if (objeto[clave] === empresa || objeto["c"] > 296) {
+            if (objeto[clave] === empresa) {
                 return objeto
             }
         }

@@ -10,6 +10,11 @@ async function getAllDiario() {
     return db.query("SELECT * FROM registro_diario ORDER BY fecha ASC")
 }
 
+// este método consulta a la BBDD y trae solo una página con 10 registros
+async function getSomeDiario() {
+    return db.query("SELECT * FROM registro_diario ORDER BY fecha DESC LIMIT 10")
+}
+
 // este método trae los datos de una empresa
 async function callApi(fechita) {
     try {       
@@ -53,4 +58,4 @@ async function getInteresantesBBDD() {
 
 
 
-module.exports = { callApi, registerDay, getRegistroFechas, insertFecha, getAllDiario, setInteresantes, getInteresantes, getInteresantesBBDD }
+module.exports = { callApi, registerDay, getRegistroFechas, insertFecha, getAllDiario, getSomeDiario, setInteresantes, getInteresantes, getInteresantesBBDD }

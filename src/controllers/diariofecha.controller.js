@@ -81,6 +81,15 @@ async function consultaDia(req, res) {
     }
 }
 
+async function consultaDiaPaginado(req, res) {
+    try {
+        const [result] = await diarioFechaModel.getSomeDiario();
+        res.json(result)
+    } catch(error) {
+        res.json({ fatal: error.message })
+    }
+}
+
 async function allInteresantes(req, res) {
     try {
         const [result] = await diarioFechaModel.getInteresantesBBDD()
@@ -100,4 +109,4 @@ async function allInteresantes(req, res) {
 
 
 
-module.exports = { getDay, consultaDia, allInteresantes }
+module.exports = { getDay, consultaDia, allInteresantes, consultaDiaPaginado }
