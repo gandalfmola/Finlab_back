@@ -7,5 +7,8 @@ const router = require("express").Router()
 // le añadimos /diariofecha y la mandamos a diariofecha.js
 router.use("/diariofecha", require("./api/diariofecha"))
 
+// le añadimos/destacados y lo mandamos a destacados.js
+router.use("/destacados", require("./api/destacados"))
+
 
 module.exports = router
