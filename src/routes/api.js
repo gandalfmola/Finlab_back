@@ -10,5 +10,8 @@ router.use("/diariofecha", require("./api/diariofecha"))
 // le añadimos/destacados y lo mandamos a destacados.js
 router.use("/destacados", require("./api/destacados"))
 
+// le añadimos /laboratorio y lo mandamos a laboratorio.js
+router.use("/laboratorio", require("./api/laboratorio"))
+
 
 module.exports = router
