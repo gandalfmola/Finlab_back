@@ -105,6 +105,52 @@ function preparaDiario(objeto, fecha) {
     return resultado
 }
 
+// esta función lleva la lógica para buscar tramos de subidas válidos
+function findTramos(arrRegistros, subida, lapso, beneficio) {
+    let comparativa = []
+    const resultado = []
+    let index = 0
+
+    for (let registro of arrRegistros) {
+        const empresa = registro.empresa
+        const cierre = registro.valor_cierre
+        comparativa.push(cierre)        
+
+        if (index == lapso && findSubida(comparativa, subida)==true) {
+            resultado.push(comparativa)
+            comparativa = []
+            index = 0
+            continue;
+        } else {
+            index++
+        }
+    }
+
+    return resultado
+}
+
+// esta función nos dice si un array de valores cumple el parámetro de subida porcentual que le indiquemos
+function findSubida(arrCierres, subida) {    
+    
+    let referencia = arrCierres[0]
+
+    for (let cierre of arrCierres) {
+        if (getPorcentaje(referencia, cierre) >= subida) {
+            return true
+        } 
+    }
+
+    return false
+
+}
+
+// esta función calcula cual es la subida porcentual entre 2 cantidades
+function getPorcentaje(num1, num2) {
+    let resultado = 0;    
+    resultado = ((num2/num1) -1) *100
+
+    return resultado.toFixed(2)
+}
 
 
-module.exports = { preparaDay, recorreObjeto, puleResultados, preparaDiario, preparaDates, extraeFechas, extraeEmpresas }
+module.exports = { preparaDay, recorreObjeto, puleResultados, preparaDiario, preparaDates, extraeFechas, extraeEmpresas, findTramos, findSubida, getPorcentaje }

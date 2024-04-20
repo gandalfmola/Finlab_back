@@ -13,6 +13,10 @@ async function getTramos(req, res) {
     console.log(beneficio);
 
     const [ todo ] = await laboratorioModel.selectAllTramos();
+    const arrSubidas = utils.findTramos(todo, subida, lapso, beneficio)
+    console.log(arrSubidas);
+    console.log(arrSubidas.length);
+    
     // console.log(todo);
     res.json(todo)
 }
