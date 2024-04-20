@@ -13,5 +13,8 @@ router.use("/destacados", require("./api/destacados"))
 // le añadimos /laboratorio y lo mandamos a laboratorio.js
 router.use("/laboratorio", require("./api/laboratorio"))
 
+// añadimos /users y lo mandamos a users.js
+router.use("/users", require("./api/users"))
+
 
 module.exports = router

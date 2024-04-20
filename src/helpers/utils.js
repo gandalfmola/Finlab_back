@@ -152,5 +152,33 @@ function getPorcentaje(num1, num2) {
     return resultado.toFixed(2)
 }
 
+// importamos las 2 librerías para poder crear los token de autenticación
+// dayjs para la fecha de expiración(ya está importada al principio del fichero)
+// jsonwebtoken para poder crear los tokens
+const jwt = require("jsonwebtoken")
 
-module.exports = { preparaDay, recorreObjeto, puleResultados, preparaDiario, preparaDates, extraeFechas, extraeEmpresas, findTramos, findSubida, getPorcentaje }
+// en el token podemos almacenar los datos que queramos, vamos a guardar el id del user, el rol y la fecha de expiración del token
+function createToken(users) {
+    // payload suele recoger info importante, aquí vamos a recoger pares clave-valor para luego usar ese contenido al descodificar
+    const payload = {
+        // estas claves luego hay que ponerlas tal cual al descodificar en el login
+        users_id: users.id,
+        users_rol: users.rol,
+        exp: dayjs().add(100, "hours").unix()
+        // exp es el momento en el que va a expirar el token, a la fecha actual le sumamos 24 horas y lo pasamos todo a formato uinx(segundos desde 1970)
+    }
+
+    // nos traemos la secret key del fichero .env
+    return jwt.sign(payload, process.env.SECRET_KEY)
+
+
+}
+
+
+
+
+
+
+
+
+module.exports = { preparaDay, recorreObjeto, puleResultados, preparaDiario, preparaDates, extraeFechas, extraeEmpresas, findTramos, findSubida, getPorcentaje, createToken }
