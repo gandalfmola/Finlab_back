@@ -26,7 +26,7 @@ async function checkToken(req, res, next) {
         payload = jwt.verify(token, process.env.SECRET_KEY)
         // payload contiene el token descodificado
     } catch(error) {
-        res.json({ problema: error.message })
+        return res.json({ problema: error.message })
     }
 
     // recuperamos el usuario que envía la petición para poder guardarlo, tenemos su id en el payload (al crear createToken decidimos guardar el id, el rol y el plazo de expiración) 
