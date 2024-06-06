@@ -107,24 +107,64 @@ function preparaDiario(objeto, fecha) {
 
 // esta función lleva la lógica para buscar tramos de subidas válidos
 function findTramos(arrRegistros, subida, lapso, beneficio) {
-    let comparativa = []
+    var comparativa = []
     const resultado = []
     let index = 0
 
+    let chivato = 0
+
+    /*PRUEBA*/
+    var empresa
+    var arrEmpresas = []
+    
+
+    console.log("longitud arrRegistros: ",arrRegistros.length);
+
     for (let registro of arrRegistros) {
-        const empresa = registro.empresa
-        const cierre = registro.valor_cierre
+        chivato++
+        /*PRUEBA*/
+        empresa = registro.empresa
+        arrEmpresas.push(empresa)
+        if (chivato < 200) {
+            console.log("arrEmpresas[0]:",arrEmpresas[0]);
+            console.log("empresa:",empresa);
+        }
+        
+        /*PRUEBA*/
+        let cierre = registro.valor_cierre
+        let fecha = dayjs(registro.fecha).format("YYYY-MM-DD")        
+        
         comparativa.push(cierre)        
 
-        if (index == lapso && findSubida(comparativa, subida)==true) {
-            resultado.push(comparativa)
+        if (((index == lapso) && (findSubida(comparativa, subida) == false)) || (empresa != arrEmpresas[0]) ) {
+            // console.log("Comparativa sin éxtio", comparativa);
+            console.log("ESTÁ EN EL IF");
             comparativa = []
             index = 0
+
+            arrEmpresas = []
+
+        } else if ((index <= lapso) && (findSubida(comparativa, subida) == true) && (empresa == arrEmpresas[0])) {
+            // console.log("ComparativaPositiva",comparativa);
+            console.log("POR AQUÍ PASA");
+            comparativa.splice(0,0, empresa)
+            comparativa.push(fecha)
+            resultado.push(comparativa)  
+
+            console.log("longitud arrEmpresas",arrEmpresas.length);
+            comparativa = []
+            index = 0
+            arrEmpresas = []
             continue;
+
         } else {
             index++
+            
         }
     }
+
+    console.log("chivato: ",chivato);
+    
 
     return resultado
 }
@@ -135,7 +175,14 @@ function findSubida(arrCierres, subida) {
     let referencia = arrCierres[0]
 
     for (let cierre of arrCierres) {
-        if (getPorcentaje(referencia, cierre) >= subida) {
+        if (Number(getPorcentaje(referencia, cierre)) >= Number(subida)) {
+            // console.log(getPorcentaje(referencia, cierre))
+            // console.log(typeof getPorcentaje(referencia, cierre));
+            // console.log(referencia)
+            // console.log(cierre)
+            // console.log(subida)
+            // console.log(typeof subida);
+            
             return true
         } 
     }
