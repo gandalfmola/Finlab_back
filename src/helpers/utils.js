@@ -113,59 +113,44 @@ function findTramos(arrRegistros, subida, lapso, beneficio) {
     let chivato = 0
     
     var empresa
-    var arrEmpresas = []
-
-    
+    var arrEmpresas = []    
     var arrFechas = []
-    
 
     console.log("longitud arrRegistros: ",arrRegistros.length);
 
     for (let registro of arrRegistros) {
-        chivato++
-        
+        chivato++        
         
         empresa = registro.empresa
         arrEmpresas.push(empresa)
-        // if (chivato < 200) {
-        //     console.log("arrEmpresas[0]:",arrEmpresas[0]);
-        //     console.log("empresa:",empresa);
-        // }
-        
-        
+     
         let cierre = registro.valor_cierre
         let fecha = dayjs(registro.fecha).format("YYYY-MM-DD")   
         
-        arrFechas.push(fecha)
-        
+        arrFechas.push(fecha)        
         comparativa.push(cierre)        
 
         if (((index == lapso) && (findSubida(comparativa, subida) == false)) || (empresa != arrEmpresas[0]) ) {
-            // console.log("Comparativa sin éxtio", comparativa);
-            // console.log("ESTÁ EN EL IF");
+
             comparativa = []
             index = 0
-
             arrEmpresas = []
-
             arrFechas = []
 
-        } else if ((index <= lapso) && (findSubida(comparativa, subida) == true) && (empresa == arrEmpresas[0])) {
-            // console.log("ComparativaPositiva",comparativa);
-            // console.log("POR AQUÍ PASA");
+        } else if ((index < lapso) && (findSubida(comparativa, subida) == true) && (empresa == arrEmpresas[0])) {
+
             comparativa.splice(0,0, empresa)
 
             for(let fecha of arrFechas) {
                 comparativa.push(fecha)
             }
-            // comparativa.push(arrFechas)
+
             resultado.push(comparativa)  
 
-            console.log("longitud arrEmpresas",arrEmpresas.length);
+            // console.log("longitud arrEmpresas",arrEmpresas.length);
             comparativa = []
             index = 0
             arrEmpresas = []
-
             arrFechas = []
             continue;
 
